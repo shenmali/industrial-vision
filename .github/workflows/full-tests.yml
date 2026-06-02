@@ -16,8 +16,8 @@ jobs:
       - name: Install uv
         run: pip install uv
       - name: Sync dependencies
-        run: uv sync
+        run: uv sync --frozen
       - name: Install pytorch group
-        run: uv sync --group pytorch
+        run: uv sync --frozen --group pytorch
       - name: Run all tests
         run: uv run pytest -v
