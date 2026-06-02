@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install uv
+        run: pip install uv
+      - name: Sync dependencies
+        run: uv sync --frozen
+      - name: Lint with ruff
+        run: uv run ruff check .
+      - name: Format check
+        run: uv run ruff format --check .
+      - name: Type check
+        run: uv run mypy src
+      - name: Run tests
+        run: uv run pytest --cov=src/industrial_vision --cov-fail-under=80
+      - name: Build Docker image
+        run: docker build -t industrial-vision:ci .
+
+  docker-smoke:
+    runs-on: ubuntu-latest
+    needs: lint-test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Smoke-test docker-compose
+        run: |
+          docker compose up -d plc-sim
+          sleep 10
+          docker compose logs plc-sim
+          docker compose down
