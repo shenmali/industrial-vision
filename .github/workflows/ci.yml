@@ -29,8 +29,7 @@ jobs:
       - name: Install deps
         run: |
           pip install pytest pytest-mock pytest-asyncio omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm httpx scikit-learn torch torchvision
-          pip freeze | grep -E "torch|albumentations|pytest" || true
       - name: Smoke test
         run: PYTHONPATH=src python -c "import industrial_vision; print('OK')"
       - name: Run tests
-        run: PYTHONPATH=src python -m pytest tests/unit/test_config.py -v
+        run: PYTHONPATH=src python -m pytest tests/unit/ -v
