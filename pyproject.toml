@@ -11,8 +11,6 @@ authors = [{ name = "CompVi Author" }]
 industrial-vision = "industrial_vision.cli:main"
 
 dependencies = [
-  "torch>=2.3.0",
-  "torchvision>=0.18.0",
   "albumentations>=1.4.0",
   "opencv-python-headless>=4.9.0",
   "numpy>=1.26.0",
@@ -38,6 +36,12 @@ dependencies = [
 
 [project.optional-dependencies]
 jetson = ["torch-tensorrt>=2.3.0", "pycuda>=2022.1"]
+
+[dependency-groups]
+pytorch = [
+  "torch>=2.3.0",
+  "torchvision>=0.18.0",
+]
 plc-opcua = ["asyncua>=1.0.0"]
 plc-snap7 = ["python-snap7>=2.0.0"]
 

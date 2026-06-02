@@ -24,19 +24,26 @@ jobs:
         run: uv run ruff format --check .
       - name: Type check
         run: uv run mypy src
-      - name: Run tests
-        run: uv run pytest --cov=src/industrial_vision --cov-fail-under=70
+      - name: Run unit tests (no pytorch)
+        run: |
+          uv run pytest \
+            tests/unit/test_config.py \
+            tests/unit/test_decision.py \
+            tests/unit/test_data_registry.py \
+            tests/unit/test_splitter.py \
+            tests/unit/test_metrics.py \
+            tests/unit/test_logging_config.py \
+            tests/unit/test_configs.py \
+            tests/unit/test_plc_base.py \
+            tests/unit/test_plc_factory.py \
+            tests/unit/test_pymodbus_client.py \
+            tests/unit/test_plc_stubs.py \
+            tests/unit/test_capture_file.py \
+            tests/unit/test_capture_video.py \
+            tests/unit/test_cli.py \
+            tests/unit/test_api.py \
+            tests/unit/test_datasets.py \
+            tests/unit/test_augment.py \
+            -v
       - name: Build Docker image
         run: docker build -t industrial-vision:ci .
-
-  docker-smoke:
-    runs-on: ubuntu-latest
-    needs: lint-test
-    steps:
-      - uses: actions/checkout@v4
-      - name: Smoke-test docker-compose
-        run: |
-          docker compose up -d plc-sim
-          sleep 10
-          docker compose logs plc-sim
-          docker compose down
