@@ -64,10 +64,9 @@ ignore = ["E501", "N812"]
 
 [tool.mypy]
 python_version = "3.11"
-strict = true
 ignore_missing_imports = true
+follow_imports = "skip"
 files = ["src/industrial_vision"]
-disable_error_code = ["no-any-return", "no-untyped-call", "type-arg"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

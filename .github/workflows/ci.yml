@@ -14,10 +14,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install ruff mypy omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm
+      - run: pip install ruff mypy omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm scikit-learn
       - run: ruff check .
       - run: ruff format --check .
-      - run: mypy src --ignore-missing-imports
+      - run: mypy src
 
   test:
     runs-on: ubuntu-latest
@@ -26,5 +26,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install pytest omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm httpx
-      - run: python -m pytest tests/unit/ -v -p no:cacheprovider --ignore=tests/unit/test_patchcore.py --ignore=tests/unit/test_efficientad.py --ignore=tests/unit/test_anomaly_ensemble.py --ignore=tests/unit/test_classifier.py --ignore=tests/unit/test_gradcam.py --ignore=tests/unit/test_pipeline.py
+      - run: pip install pytest pytest-mock omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm httpx scikit-learn
+      - run: PYTHONPATH=src python -m pytest tests/unit/ -v --ignore=tests/unit/test_patchcore.py --ignore=tests/unit/test_efficientad.py --ignore=tests/unit/test_anomaly_ensemble.py --ignore=tests/unit/test_classifier.py --ignore=tests/unit/test_gradcam.py --ignore=tests/unit/test_pipeline.py
