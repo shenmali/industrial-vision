@@ -69,7 +69,13 @@ class AnomalyDataset(Dataset):
             self.samples = [p for p in sorted(self.good_dir.iterdir()) if p.is_file()]
         else:
             assert self.test_dir is not None, "test_dir required when train=False"
-            self.samples = [p for p in sorted(self.test_dir.iterdir()) if p.is_file()]
+            self.samples = [
+                p
+                for cls_dir in sorted(self.test_dir.iterdir())
+                if cls_dir.is_dir()
+                for p in sorted(cls_dir.iterdir())
+                if p.is_file()
+            ]
             self.labels: list[int] = [0 if p.parent.name == "good" else 1 for p in self.samples]
 
     def __len__(self) -> int:

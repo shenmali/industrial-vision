@@ -8,8 +8,8 @@ Siemens S7 is a config change in `configs/plc.yaml`.
 
 | Address | Type | Name | Meaning |
 |---------|------|------|---------|
-| 0 | Coil | HEARTBEAT | Toggles 1 Hz |
-| 0 | Coil | TRIGGER | Inference complete |
+| 0 | Coil | TRIGGER | Inference complete (toggled by `write_reject`) |
+| 1 | Coil | HEARTBEAT | Toggles 1 Hz (by `heartbeat`) |
 | 1 | Holding | REJECT | 0=ok, 1=reject |
 | 2 | Holding | CONFIDENCE | ×10000 (uint16, 0–10000) |
 | 10 | Holding | DEFECT_CODE | uint16 enum |

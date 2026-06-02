@@ -9,8 +9,8 @@ from industrial_vision.plc.base import PLCClient, PLCConnectionError
 REG_REJECT = 1
 REG_CONFIDENCE = 2
 REG_DEFECT_CODE = 10
-REG_HEARTBEAT = 0
 COIL_TRIGGER = 0
+COIL_HEARTBEAT = 1
 
 
 class PyModbusClient(PLCClient):
@@ -51,7 +51,7 @@ class PyModbusClient(PLCClient):
         return bool(result.bits[0])
 
     def heartbeat(self) -> None:
-        result = self.client.read_coils(REG_HEARTBEAT, count=1, device_id=self.slave_id)
+        result = self.client.read_coils(COIL_HEARTBEAT, count=1, device_id=self.slave_id)
         if result.isError():
             return
-        self.client.write_coil(REG_HEARTBEAT, not result.bits[0], device_id=self.slave_id)
+        self.client.write_coil(COIL_HEARTBEAT, not result.bits[0], device_id=self.slave_id)
