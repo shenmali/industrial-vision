@@ -34,7 +34,5 @@ jobs:
           --ignore=tests/unit/test_classifier.py \
           --ignore=tests/unit/test_gradcam.py \
           --ignore=tests/unit/test_pipeline.py \
-          --ignore=tests/unit/test_datasets.py \
-          --ignore=tests/unit/test_augment.py \
           --ignore=tests/unit/test_pymodbus_client.py \
           -p no:cacheprovider

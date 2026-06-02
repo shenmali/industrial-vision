@@ -7,22 +7,26 @@ from typing import Any
 
 import cv2
 import numpy as np
-from torch.utils.data import Dataset
 
-from industrial_vision.data.augment import build_eval_transform, build_train_transform
+_Dataset: type = object
+try:
+    from torch.utils.data import Dataset as _TorchDataset
+
+    _Dataset = _TorchDataset
+except ImportError:
+    pass
+
+from industrial_vision.data.augment import build_eval_transform, build_train_transform  # noqa: E402
 
 
 def _read_image(path: Path) -> np.ndarray:
-    """Read an image from disk as RGB. Raises ValueError on decode failure."""
     img = cv2.imread(str(path))
     if img is None:
         raise ValueError(f"Could not read image: {path}")
     return cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 
-class ClassificationDataset(Dataset):
-    """ImageFolder-style classification dataset with per-index transform."""
-
+class ClassificationDataset(_TorchDataset):
     def __init__(
         self,
         root: str | Path,
@@ -52,9 +56,7 @@ class ClassificationDataset(Dataset):
         return {"image": out["image"], "label": label, "path": str(path)}
 
 
-class AnomalyDataset(Dataset):
-    """Unsupervised anomaly detection dataset. `good` is the only training class."""
-
+class AnomalyDataset(_TorchDataset):
     def __init__(
         self,
         good_dir: str | Path,

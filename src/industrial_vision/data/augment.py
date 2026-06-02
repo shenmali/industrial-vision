@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import albumentations as A
-from albumentations.pytorch import ToTensorV2
 
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
@@ -11,7 +10,8 @@ DEFAULT_SIZE = 224
 
 
 def build_train_transform(size: int = DEFAULT_SIZE) -> A.Compose:
-    """Training-time augmentation: flips, brightness, blur, ImageNet normalization."""
+    from albumentations.pytorch import ToTensorV2
+
     return A.Compose(
         [
             A.Resize(size, size),
@@ -27,7 +27,8 @@ def build_train_transform(size: int = DEFAULT_SIZE) -> A.Compose:
 
 
 def build_eval_transform(size: int = DEFAULT_SIZE) -> A.Compose:
-    """Deterministic eval transform: resize + normalize, no random ops."""
+    from albumentations.pytorch import ToTensorV2
+
     return A.Compose(
         [
             A.Resize(size, size),
