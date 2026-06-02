@@ -7,6 +7,9 @@ readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "CompVi Author" }]
 
+[project.scripts]
+industrial-vision = "industrial_vision.cli:main"
+
 dependencies = [
   "torch>=2.3.0",
   "torchvision>=0.18.0",

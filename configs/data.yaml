@@ -1,0 +1,17 @@
+data_root: data
+sources:
+  - name: mvtec_ad
+    enabled: true
+    categories: [bottle, cable, capsule, metal_nut, pill]
+  - name: visa
+    enabled: true
+    categories: [candle, capsules, cashew]
+  - name: webcam
+    enabled: false
+    path: data/raw/webcam
+
+splits:
+  train: 0.7
+  val: 0.15
+  test: 0.15
+  seed: 42

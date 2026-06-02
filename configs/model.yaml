@@ -1,0 +1,15 @@
+anomaly:
+  patchcore:
+    backbone: resnet18
+    coreset_subsample: 16
+  efficientad:
+    enabled: true
+  ensemble_weights: [0.5, 0.5]
+
+classifier:
+  backbone: efficientnet_b0
+  num_classes: 5
+
+heatmap:
+  method: gradcam
+  target_layer: backbone.features.7

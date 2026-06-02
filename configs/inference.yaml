@@ -1,0 +1,6 @@
+backend: pytorch
+capture:
+  type: file
+  source: data/raw/webcam
+  loop: true
+device: cpu
