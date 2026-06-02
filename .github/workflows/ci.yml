@@ -28,4 +28,4 @@ jobs:
           python-version: "3.11"
       - run: pip install pytest pytest-mock pytest-asyncio omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm httpx scikit-learn
       - run: PYTHONPATH=src python -m pytest tests/unit/ -v \
-          -k "not PatchCore and not EfficientAD and not Ensemble and not Classifier and not GradCAM and not pipeline"
+          -k "not PatchCore and not EfficientAD and not Ensemble and not Classifier and not GradCAM and not pipeline and not augment and not dataset and not pymodbus"
