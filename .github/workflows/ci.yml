@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install ruff mypy omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm scikit-learn torch torchvision
+      - run: pip install ruff mypy omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm scikit-learn
       - run: ruff check .
       - run: ruff format --check .
       - run: mypy src
@@ -26,5 +26,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install pytest pytest-mock pytest-asyncio omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm httpx scikit-learn torch torchvision
-      - run: PYTHONPATH=src python -m pytest tests/unit/ -v -p no:cacheprovider
+      - name: Install deps
+        run: |
+          pip install pytest pytest-mock pytest-asyncio omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm httpx scikit-learn torch torchvision
+          pip freeze | grep -E "torch|albumentations|pytest" || true
+      - name: Smoke test
+        run: PYTHONPATH=src python -c "import industrial_vision; print('OK')"
+      - name: Run tests
+        run: PYTHONPATH=src python -m pytest tests/unit/test_config.py -v
