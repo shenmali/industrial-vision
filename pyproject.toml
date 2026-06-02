@@ -6,10 +6,6 @@ requires-python = ">=3.11,<3.13"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "CompVi Author" }]
-
-[project.scripts]
-industrial-vision = "industrial_vision.cli:main"
-
 dependencies = [
   "albumentations>=1.4.0",
   "opencv-python-headless>=4.9.0",
@@ -34,16 +30,18 @@ dependencies = [
   "seaborn>=0.13.0",
 ]
 
+[project.scripts]
+industrial-vision = "industrial_vision.cli:main"
+
 [project.optional-dependencies]
-jetson = ["torch-tensorrt>=2.3.0", "pycuda>=2022.1"]
+plc-opcua = ["asyncua>=1.0.0"]
+plc-snap7 = ["python-snap7>=2.0.0"]
 
 [dependency-groups]
 pytorch = [
   "torch>=2.3.0",
   "torchvision>=0.18.0",
 ]
-plc-opcua = ["asyncua>=1.0.0"]
-plc-snap7 = ["python-snap7>=2.0.0"]
 
 [build-system]
 requires = ["hatchling"]
@@ -73,7 +71,7 @@ disable_error_code = ["no-any-return", "no-untyped-call", "type-arg"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra -q --cov=src/industrial_vision --cov-report=term-missing"
+addopts = "-ra -q"
 asyncio_mode = "auto"
 markers = [
   "integration: end-to-end tests",

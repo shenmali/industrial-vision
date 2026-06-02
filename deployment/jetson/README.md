@@ -6,8 +6,9 @@ This directory contains deployment artifacts for NVIDIA Jetson Orin.
 
 1. Flash JetPack 5.1+ on the device.
 2. Install Python 3.11 and uv on-device.
-3. `uv sync --extra jetson` in the project root.
-4. Export classifier to TensorRT:
+3. `uv sync --group pytorch` in the project root.
+4. Install Jetson-specific extras (torch-tensorrt, pycuda) via `pip install`.
+5. Export classifier to TensorRT:
    `python deployment/jetson/tensorrt_export.py --checkpoint checkpoints/classifier.pt --output checkpoints/classifier.ts --num-classes 5`
 5. Run: `uv run industrial-vision run --config configs/inference.yaml`
 6. Install systemd unit:
