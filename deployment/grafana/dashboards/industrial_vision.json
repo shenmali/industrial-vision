@@ -1,0 +1,37 @@
+{
+  "title": "Industrial Vision",
+  "schemaVersion": 38,
+  "version": 1,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Frame latency (p50/p95/p99)",
+      "targets": [
+        { "expr": "histogram_quantile(0.5, sum by (le) (rate(iv_frame_latency_seconds_bucket[1m])))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, sum by (le) (rate(iv_frame_latency_seconds_bucket[1m])))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, sum by (le) (rate(iv_frame_latency_seconds_bucket[1m])))", "legendFormat": "p99" }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Defect rate (last 5m)",
+      "targets": [
+        { "expr": "sum(rate(iv_defect_total{decision=\"reject\"}[5m]))" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Modbus roundtrip (ms)",
+      "targets": [
+        { "expr": "histogram_quantile(0.99, sum by (le) (rate(iv_modbus_roundtrip_seconds_bucket[1m]))) * 1000", "legendFormat": "p99 (ms)" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Frame throughput (FPS)",
+      "targets": [
+        { "expr": "iv_frame_throughput_fps" }
+      ]
+    }
+  ]
+}
