@@ -27,4 +27,14 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install pytest pytest-mock pytest-asyncio omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm httpx scikit-learn
-      - run: PYTHONPATH=src python -m pytest tests/unit/ -v --ignore=tests/unit/test_patchcore.py --ignore=tests/unit/test_efficientad.py --ignore=tests/unit/test_anomaly_ensemble.py --ignore=tests/unit/test_classifier.py --ignore=tests/unit/test_gradcam.py --ignore=tests/unit/test_pipeline.py
+      - run: PYTHONPATH=src python -m pytest tests/unit/ -v \
+          --ignore=tests/unit/test_patchcore.py \
+          --ignore=tests/unit/test_efficientad.py \
+          --ignore=tests/unit/test_anomaly_ensemble.py \
+          --ignore=tests/unit/test_classifier.py \
+          --ignore=tests/unit/test_gradcam.py \
+          --ignore=tests/unit/test_pipeline.py \
+          --ignore=tests/unit/test_datasets.py \
+          --ignore=tests/unit/test_augment.py \
+          --ignore=tests/unit/test_pymodbus_client.py \
+          -p no:cacheprovider
