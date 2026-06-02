@@ -1,0 +1,16 @@
+[Unit]
+Description=Industrial Vision inference service
+After=network.target
+
+[Service]
+Type=simple
+User=jetson
+WorkingDirectory=/opt/industrial-vision
+ExecStart=/opt/industrial-vision/.venv/bin/industrial-vision run --config configs/inference.yaml
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:/var/log/industrial-vision/app.log
+StandardError=append:/var/log/industrial-vision/app.log
+
+[Install]
+WantedBy=multi-user.target
