@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Industrial Vision — HMI</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; background: #0f172a; color: #e2e8f0; }
+    h1 { color: #38bdf8; }
+    .panel { background: #1e293b; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
+    .led { display: inline-block; width: 1.5rem; height: 1.5rem; border-radius: 50%; }
+    .led.ok { background: #22c55e; }
+    .led.reject { background: #ef4444; }
+    .led.off { background: #475569; }
+  </style>
+</head>
+<body>
+  <h1>Industrial Vision — Live HMI</h1>
+  <div class="panel">
+    <h2>PLC State</h2>
+    <p>Status LED: <span class="led off" id="status-led"></span></p>
+    <p>OK LED: <span class="led ok" id="ok-led"></span></p>
+    <p>Reject LED: <span class="led reject" id="reject-led"></span></p>
+    <p>Last defect code: <span id="defect-code">—</span></p>
+    <p>Last confidence: <span id="confidence">—</span></p>
+    <p>Total parts processed: <span id="parts-total">0</span></p>
+    <p>Rejects: <span id="parts-rejected">0</span></p>
+  </div>
+  <p>This HMI is a frontend placeholder. In production, a small FastAPI bridge reads
+     Modbus registers and pushes state to this UI via WebSocket or polling.</p>
+</body>
+</html>
