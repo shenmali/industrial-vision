@@ -49,3 +49,7 @@ logs/
 
 # Build / docs
 site/
+
+# Personal drafts (not for the public repo)
+docs/blog-post.md
+docs/linkedin-post.md
