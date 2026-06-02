@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from industrial_vision.data.registry import DatasetRegistry, SUPPORTED_DATASETS
+from industrial_vision.data.registry import SUPPORTED_DATASETS, DatasetRegistry
 
 
 @pytest.fixture

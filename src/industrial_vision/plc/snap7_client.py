@@ -1,4 +1,5 @@
 """Stub Siemens S7 client. Implement with `python-snap7` when integrating a real PLC."""
+
 from __future__ import annotations
 
 from industrial_vision.plc.base import PLCClient, PLCConnectionError

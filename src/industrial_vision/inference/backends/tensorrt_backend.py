@@ -1,4 +1,5 @@
 """TensorRT inference backend for Jetson. Classifier is JIT/TensorRT-compiled; anomaly stays PyTorch."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -26,7 +27,7 @@ class TensorRTBackend:
         self.patchcore.fit(sample_batch)
         self.efficientad.fit(sample_batch)
 
-    def predict(self, frame: np.ndarray) -> dict[str, object]:
+    def predict(self, frame: np.ndarray) -> dict[str, float | int | torch.Tensor | None]:
         tensor = build_eval_transform()(image=frame)["image"].unsqueeze(0)
         with torch.no_grad():
             logits = self.engine(tensor)

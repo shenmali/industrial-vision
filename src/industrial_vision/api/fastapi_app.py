@@ -1,4 +1,5 @@
 """FastAPI app: /health, /metrics, /predict."""
+
 from __future__ import annotations
 
 from fastapi import FastAPI

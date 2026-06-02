@@ -3,6 +3,7 @@
 Uses mid-level ResNet features, builds a memory bank of patch features,
 and predicts anomaly score as the distance to the nearest neighbor.
 """
+
 from __future__ import annotations
 
 import torch

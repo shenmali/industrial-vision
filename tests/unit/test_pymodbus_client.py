@@ -1,8 +1,9 @@
+import threading
+import time
+
 import pytest
 from pymodbus.datastore import ModbusSequentialDataBlock, ModbusServerContext, ModbusSlaveContext
 from pymodbus.server import StartTcpServer
-import threading
-import time
 
 from industrial_vision.plc.pymodbus_client import PyModbusClient
 

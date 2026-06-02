@@ -1,4 +1,5 @@
 """Dataset registry: download and inspect MVTec AD, VisA, and custom webcam data."""
+
 from __future__ import annotations
 
 import tarfile
@@ -6,7 +7,6 @@ import urllib.request
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
-from typing import ClassVar
 
 from tqdm import tqdm
 
@@ -19,7 +19,7 @@ class DatasetSpec:
     categories: tuple[str, ...]
 
 
-SUPPORTED_DATASETS: ClassVar[dict[str, DatasetSpec]] = {
+SUPPORTED_DATASETS: dict[str, DatasetSpec] = {
     "mvtec_ad": DatasetSpec(
         name="mvtec_ad",
         url=(
@@ -28,9 +28,21 @@ SUPPORTED_DATASETS: ClassVar[dict[str, DatasetSpec]] = {
         ),
         checksum="",
         categories=(
-            "bottle", "cable", "capsule", "carpet", "grid",
-            "hazelnut", "leather", "metal_nut", "pill", "screw",
-            "tile", "toothbrush", "transistor", "wood", "zipper",
+            "bottle",
+            "cable",
+            "capsule",
+            "carpet",
+            "grid",
+            "hazelnut",
+            "leather",
+            "metal_nut",
+            "pill",
+            "screw",
+            "tile",
+            "toothbrush",
+            "transistor",
+            "wood",
+            "zipper",
         ),
     ),
     "visa": DatasetSpec(
@@ -38,9 +50,18 @@ SUPPORTED_DATASETS: ClassVar[dict[str, DatasetSpec]] = {
         url="https://amazon-visual-anomaly.s3.us-west-2.amazonaws.com/VisA_20220922.tar",
         checksum="",
         categories=(
-            "candle", "capsules", "cashew", "chewinggum", "fryum",
-            "macaroni1", "macaroni2", "pcb1", "pcb2", "pcb3",
-            "pcb4", "pipe_fryum",
+            "candle",
+            "capsules",
+            "cashew",
+            "chewinggum",
+            "fryum",
+            "macaroni1",
+            "macaroni2",
+            "pcb1",
+            "pcb2",
+            "pcb3",
+            "pcb4",
+            "pipe_fryum",
         ),
     ),
 }

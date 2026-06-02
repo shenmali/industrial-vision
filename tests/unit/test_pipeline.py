@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 import torch
 
 from industrial_vision.inference.backends.pytorch_backend import PyTorchBackend

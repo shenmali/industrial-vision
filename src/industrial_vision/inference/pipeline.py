@@ -1,4 +1,5 @@
 """Pipeline orchestrator: backend + decision policy, runs one frame at a time."""
+
 from __future__ import annotations
 
 import numpy as np
@@ -14,8 +15,14 @@ class Pipeline:
 
     def run_frame(self, frame: np.ndarray) -> Decision:
         out = self.backend.predict(frame)
+        anomaly_score = out["anomaly_score"]
+        confidence = out["confidence"]
+        defect_code = out["defect_code"]
+        assert isinstance(anomaly_score, float)
+        assert isinstance(confidence, float)
+        assert isinstance(defect_code, int)
         return self.policy.decide(
-            anomaly_score=out["anomaly_score"],
-            classifier_conf=out["confidence"],
-            defect_code=int(out["defect_code"]),
+            anomaly_score=anomaly_score,
+            classifier_conf=confidence,
+            defect_code=defect_code,
         )

@@ -1,4 +1,5 @@
 """Stub OPC UA client. Implement with `asyncua` when integrating a real PLC."""
+
 from __future__ import annotations
 
 from industrial_vision.plc.base import PLCClient, PLCConnectionError

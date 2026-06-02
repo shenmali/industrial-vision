@@ -1,4 +1,5 @@
 """Dataset classes: classification and unsupervised anomaly detection."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -69,9 +70,7 @@ class AnomalyDataset(Dataset):
         else:
             assert self.test_dir is not None, "test_dir required when train=False"
             self.samples = [p for p in sorted(self.test_dir.iterdir()) if p.is_file()]
-            self.labels: list[int] = [
-                0 if p.parent.name == "good" else 1 for p in self.samples
-            ]
+            self.labels: list[int] = [0 if p.parent.name == "good" else 1 for p in self.samples]
 
     def __len__(self) -> int:
         return len(self.samples)

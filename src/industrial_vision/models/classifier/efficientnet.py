@@ -1,4 +1,5 @@
 """EfficientNet-B0 based defect type classifier with ImageNet pretrained backbone."""
+
 from __future__ import annotations
 
 import torch

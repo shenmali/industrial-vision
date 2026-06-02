@@ -1,4 +1,5 @@
 """Simulated Modbus TCP PLC for development and demos."""
+
 from __future__ import annotations
 
 import argparse

@@ -1,4 +1,5 @@
 """Iterate over image files in a directory. Useful for replay, CI, and demos."""
+
 from __future__ import annotations
 
 from collections.abc import Iterator
@@ -13,7 +14,8 @@ class FileCapture(Iterator[np.ndarray]):
         self.directory = Path(directory)
         self.loop = loop
         self.files = sorted(
-            p for p in self.directory.iterdir()
+            p
+            for p in self.directory.iterdir()
             if p.suffix.lower() in {".png", ".jpg", ".jpeg", ".bmp"}
         )
         if not self.files:

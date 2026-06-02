@@ -55,8 +55,9 @@ def test_anomaly_dataset_train_length(fake_anomaly_dirs: dict[str, Path]) -> Non
 
 
 def test_anomaly_dataset_test_has_labels(fake_anomaly_dirs: dict[str, Path]) -> None:
-    ds = AnomalyDataset(good_dir=fake_anomaly_dirs["good"],
-                        test_dir=fake_anomaly_dirs["test"], train=False)
+    ds = AnomalyDataset(
+        good_dir=fake_anomaly_dirs["good"], test_dir=fake_anomaly_dirs["test"], train=False
+    )
     assert len(ds) == 7
     labels = [ds[i]["label"] for i in range(len(ds))]
     assert sum(labels) == 4  # 4 broken samples

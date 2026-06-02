@@ -1,4 +1,5 @@
 """Export a trained PyTorch classifier to a TensorRT engine for Jetson."""
+
 from __future__ import annotations
 
 import argparse
@@ -7,7 +8,9 @@ from pathlib import Path
 import torch
 
 
-def export_classifier(checkpoint: Path, output: Path, num_classes: int, input_size: int = 224) -> None:
+def export_classifier(
+    checkpoint: Path, output: Path, num_classes: int, input_size: int = 224
+) -> None:
     from industrial_vision.models.classifier.efficientnet import DefectClassifier
 
     model = DefectClassifier(num_classes=num_classes)
@@ -17,6 +20,7 @@ def export_classifier(checkpoint: Path, output: Path, num_classes: int, input_si
     scripted = torch.jit.script(model)
     try:
         import torch_tensorrt  # type: ignore[import-untyped]
+
         trt = torch_tensorrt.ts.compile(  # type: ignore[attr-defined]
             scripted,
             inputs=[torch.zeros(1, 3, input_size, input_size)],

@@ -2,6 +2,7 @@
 
 Anomaly score = per-pixel MSE between teacher and student, scaled and clamped.
 """
+
 from __future__ import annotations
 
 import torch

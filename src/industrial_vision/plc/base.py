@@ -1,4 +1,5 @@
 """Abstract base for PLC clients. All drivers must implement this interface."""
+
 from __future__ import annotations
 
 from abc import ABC, abstractmethod

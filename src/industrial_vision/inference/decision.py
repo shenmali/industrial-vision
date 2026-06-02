@@ -1,4 +1,5 @@
 """Decision policy: deterministic rule combining anomaly score and classifier confidence."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

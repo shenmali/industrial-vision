@@ -8,12 +8,11 @@ from industrial_vision.data.splitter import SplitConfig, Splitter, check_leakage
 @pytest.fixture
 def fake_classification_dataset(tmp_path: Path) -> Path:
     base = tmp_path / "data" / "processed" / "classification"
-    for split in ("train", "val", "test"):
-        for cls in ("good", "defect_a", "defect_b"):
-            d = base / split / cls
-            d.mkdir(parents=True)
-            for i in range(10):
-                (d / f"{i:03d}.png").touch()
+    for cls in ("good", "defect_a", "defect_b"):
+        d = base / cls
+        d.mkdir(parents=True)
+        for i in range(20):
+            (d / f"{i:03d}.png").touch()
     return base
 
 

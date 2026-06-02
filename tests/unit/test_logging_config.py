@@ -22,6 +22,6 @@ def test_configure_logging_respects_level(tmp_path) -> None:
     log.info("info_msg")
     log.warning("warn_msg")
     lines = log_file.read_text().strip().splitlines()
-    levels = [json.loads(l)["level"] for l in lines]
+    levels = [json.loads(line)["level"] for line in lines]
     assert "INFO" not in levels
     assert "WARNING" in levels

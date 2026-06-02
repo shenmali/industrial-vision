@@ -1,4 +1,5 @@
 """Grad-CAM: gradient-weighted class activation map from a named conv layer."""
+
 from __future__ import annotations
 
 import torch

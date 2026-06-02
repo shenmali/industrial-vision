@@ -1,6 +1,6 @@
 import pytest
 
-from industrial_vision.plc.base import PLCClient, PLCConnectionError
+from industrial_vision.plc.base import PLCClient
 
 
 def test_plc_client_is_abstract() -> None:

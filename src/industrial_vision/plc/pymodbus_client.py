@@ -1,4 +1,5 @@
 """PyModbus TCP client for Modbus-TCP PLCs."""
+
 from __future__ import annotations
 
 from pymodbus.client import ModbusTcpClient
@@ -37,20 +38,20 @@ class PyModbusClient(PLCClient):
             raise ValueError("defect_code out of range")
         if not 0.0 <= confidence <= 1.0:
             raise ValueError("confidence must be in [0,1]")
-        self.client.write_coil(COIL_TRIGGER, True, slave=self.slave_id)
-        self.client.write_register(REG_REJECT, 1 if reject else 0, slave=self.slave_id)
-        self.client.write_register(REG_CONFIDENCE, int(confidence * 10000), slave=self.slave_id)
-        self.client.write_register(REG_DEFECT_CODE, int(defect_code), slave=self.slave_id)
-        self.client.write_coil(COIL_TRIGGER, False, slave=self.slave_id)
+        self.client.write_coil(COIL_TRIGGER, True, device_id=self.slave_id)
+        self.client.write_register(REG_REJECT, 1 if reject else 0, device_id=self.slave_id)
+        self.client.write_register(REG_CONFIDENCE, int(confidence * 10000), device_id=self.slave_id)
+        self.client.write_register(REG_DEFECT_CODE, int(defect_code), device_id=self.slave_id)
+        self.client.write_coil(COIL_TRIGGER, False, device_id=self.slave_id)
 
     def read_trigger(self) -> bool:
-        result = self.client.read_coils(COIL_TRIGGER, 1, slave=self.slave_id)
+        result = self.client.read_coils(COIL_TRIGGER, count=1, device_id=self.slave_id)
         if result.isError():
             return False
         return bool(result.bits[0])
 
     def heartbeat(self) -> None:
-        result = self.client.read_coils(REG_HEARTBEAT, 1, slave=self.slave_id)
+        result = self.client.read_coils(REG_HEARTBEAT, count=1, device_id=self.slave_id)
         if result.isError():
             return
-        self.client.write_coil(REG_HEARTBEAT, not result.bits[0], slave=self.slave_id)
+        self.client.write_coil(REG_HEARTBEAT, not result.bits[0], device_id=self.slave_id)

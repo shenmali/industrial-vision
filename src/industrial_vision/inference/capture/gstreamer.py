@@ -1,4 +1,5 @@
 """GStreamer pipeline capture (CSI cameras on Jetson or arbitrary GStreamer sources)."""
+
 from __future__ import annotations
 
 from collections.abc import Iterator

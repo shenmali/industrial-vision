@@ -11,9 +11,16 @@ from industrial_vision.plc.factory import build_plc_client
 @pytest.fixture(scope="module")
 def plc_server() -> None:
     proc = subprocess.Popen(
-        [sys.executable, str(Path(__file__).parent.parent.parent / "deployment/plc_sim/server.py"),
-         "--host", "127.0.0.1", "--port", "5022"],
-        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        [
+            sys.executable,
+            str(Path(__file__).parent.parent.parent / "deployment/plc_sim/server.py"),
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "5022",
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
     time.sleep(2.0)
     yield

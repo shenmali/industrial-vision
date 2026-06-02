@@ -1,6 +1,6 @@
 import pytest
 
-from industrial_vision.inference.decision import DecisionPolicy, Decision
+from industrial_vision.inference.decision import Decision, DecisionPolicy
 
 
 def test_decision_policy_rejects_when_both_above_threshold() -> None:

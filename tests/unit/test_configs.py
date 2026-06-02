@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 
 def test_load_data_config() -> None:
     from industrial_vision.config import load_config

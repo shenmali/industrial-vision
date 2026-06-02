@@ -1,4 +1,5 @@
 """Weighted average of PatchCore and EfficientAD anomaly scores."""
+
 from __future__ import annotations
 
 import torch

@@ -18,7 +18,8 @@ def test_eval_transform_deterministic() -> None:
 
 
 def test_train_transform_produces_normalized_tensor() -> None:
-    img = (np.ones((128, 128, 3), dtype=np.uint8) * 255)
+    rng = np.random.default_rng(42)
+    img = rng.integers(0, 256, (128, 128, 3), dtype=np.uint8)
     out = build_train_transform()(image=img)["image"]
     assert out.min() < 0
     assert out.max() > 0

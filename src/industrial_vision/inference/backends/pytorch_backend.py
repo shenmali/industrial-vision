@@ -1,4 +1,5 @@
 """PyTorch inference backend combining anomaly ensemble, classifier, and Grad-CAM."""
+
 from __future__ import annotations
 
 import numpy as np
@@ -25,7 +26,7 @@ class PyTorchBackend:
         self.patchcore.fit(sample_batch)
         self.efficientad.fit(sample_batch)
 
-    def predict(self, frame: np.ndarray) -> dict[str, object]:
+    def predict(self, frame: np.ndarray) -> dict[str, float | int | torch.Tensor | None]:
         tensor = build_eval_transform()(image=frame)["image"].unsqueeze(0).to(self.device)
         anomaly_score = self.anomaly_ensemble.predict(tensor)
         label, conf = self.classifier.predict(tensor)

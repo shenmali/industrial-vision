@@ -1,4 +1,5 @@
 """Conftest: ensure src/ is on sys.path so tests can import the package without install."""
+
 import sys
 from pathlib import Path
 
