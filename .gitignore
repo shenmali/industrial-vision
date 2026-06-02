@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+*.egg-info/
+dist/
+build/
+
+# DVC / data
+data/raw/
+data/processed/
+data/splits/
+*.dvc
+
+# Models / artifacts
+*.pt
+*.pth
+*.onnx
+*.engine
+*.plan
+checkpoints/
+runs/
+wandb/
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Secrets
+.env
+*.env
+
+# Build / docs
+site/
