@@ -29,7 +29,7 @@ jobs:
       - name: Install deps
         run: |
           pip install pytest pytest-mock pytest-asyncio omegaconf pydantic prometheus-client fastapi pymodbus opencv-python-headless albumentations numpy pillow tqdm httpx scikit-learn torch torchvision
-      - name: Smoke test
-        run: PYTHONPATH=src python -c "import industrial_vision; print('OK')"
-      - name: Run tests
-        run: PYTHONPATH=src python -m pytest tests/unit/ -v
+      - name: Test group 1 (no torch)
+        run: PYTHONPATH=src python -m pytest tests/unit/test_config.py tests/unit/test_decision.py tests/unit/test_data_registry.py tests/unit/test_splitter.py tests/unit/test_metrics.py tests/unit/test_logging_config.py tests/unit/test_configs.py tests/unit/test_plc_base.py tests/unit/test_plc_factory.py tests/unit/test_plc_stubs.py tests/unit/test_capture_file.py tests/unit/test_capture_video.py tests/unit/test_cli.py tests/unit/test_api.py -v
+      - name: Test group 2 (torch)
+        run: PYTHONPATH=src python -m pytest tests/unit/test_patchcore.py tests/unit/test_efficientad.py tests/unit/test_anomaly_ensemble.py tests/unit/test_classifier.py tests/unit/test_gradcam.py tests/unit/test_pipeline.py tests/unit/test_datasets.py tests/unit/test_augment.py tests/unit/test_pymodbus_client.py -v
