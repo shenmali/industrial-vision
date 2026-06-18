@@ -37,14 +37,15 @@ class EfficientAD:
         self.teacher = _Teacher().to(self.device).eval()
         self.student = _Student().to(self.device)
 
-    @torch.no_grad()
     def fit(self, images: torch.Tensor, epochs: int = 1, lr: float = 1e-4) -> None:
         opt = torch.optim.Adam(self.student.parameters(), lr=lr)
         self.student.train()
         for _ in range(epochs):
             opt.zero_grad()
-            t = self.teacher(images.to(self.device))
-            s = self.student(images.to(self.device))
+            batch = images.to(self.device)
+            with torch.no_grad():
+                t = self.teacher(batch)
+            s = self.student(batch)
             loss = F.mse_loss(s, t)
             loss.backward()
             opt.step()
