@@ -23,12 +23,16 @@ class GradCAM:
         self._gradients = _grad_out[0].detach()
 
     def __call__(self, x: torch.Tensor, class_idx: int | None = None) -> torch.Tensor:
-        self.model.zero_grad()
-        logits = self.model(x)
-        if class_idx is None:
-            class_idx = int(logits.argmax(dim=-1).item())
-        score = logits[0, class_idx]
-        score.backward()
+        self._activations = None
+        self._gradients = None
+        self.model.zero_grad(set_to_none=True)
+        x_for_grad = x.detach().requires_grad_(True)
+        with torch.enable_grad():
+            logits = self.model(x_for_grad)
+            if class_idx is None:
+                class_idx = int(logits.argmax(dim=-1).item())
+            score = logits[0, class_idx]
+            score.backward()
         assert self._activations is not None and self._gradients is not None
         weights = self._gradients.mean(dim=(2, 3), keepdim=True)
         cam = (weights * self._activations).sum(dim=1, keepdim=True)
